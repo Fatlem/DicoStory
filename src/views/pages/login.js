@@ -31,15 +31,18 @@ class LoginPage {
             
             <div class="form-group">
               <label for="password" class="form-label">Password</label>
-              <input 
-                type="password" 
-                id="password" 
-                name="password" 
-                class="form-input" 
-                required
-                placeholder="Masukkan password"
-                minlength="8"
-              >
+              <div class="password-container">
+                <input 
+                  type="password" 
+                  id="password" 
+                  name="password" 
+                  class="form-input" 
+                  required
+                  placeholder="Masukkan password"
+                  minlength="8"
+                >
+                <i id="toggle-password" class="fas fa-eye"></i>
+              </div>
             </div>
             
             <button type="submit" class="btn btn-block">
@@ -73,6 +76,17 @@ class LoginPage {
       
       await this._presenter.login(email, password);
     });
+
+    const togglePassword = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('password');
+    
+    togglePassword.addEventListener('click', () => {
+      const type = passwordInput.type === 'password' ? 'text' : 'password';
+      passwordInput.type = type;
+      
+      togglePassword.classList.toggle('fa-eye');
+      togglePassword.classList.toggle('fa-eye-slash');
+    });
   }
 
   showLoading() {
@@ -99,6 +113,8 @@ class LoginPage {
           ${message}
         </div>
       `;
+      
+      alertContainer.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
