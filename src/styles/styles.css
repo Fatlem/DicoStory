@@ -883,6 +883,29 @@ footer {
   gap: 1.5rem;
 }
 
+.password-container {
+  position: relative;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 30px;
+}
+
+.password-container i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--text-secondary); 
+  display: none; 
+}
+
+.password-container input:not(:placeholder-shown) + i {
+  display: block;
+}
+
 @media (min-width: 768px) {
   .coordinator-grid.masonry {
     grid-auto-rows: auto; 
