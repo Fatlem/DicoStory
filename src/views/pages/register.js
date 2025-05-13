@@ -43,29 +43,35 @@ class RegisterPage {
             
             <div class="form-group">
               <label for="password" class="form-label">Password</label>
-              <input 
-                type="password" 
-                id="password" 
-                name="password" 
-                class="form-input" 
-                required
-                placeholder="Masukkan password"
-                minlength="8"
-              >
+              <div class="password-container">
+                <input 
+                  type="password" 
+                  id="password" 
+                  name="password" 
+                  class="form-input" 
+                  required
+                  placeholder="Masukkan password"
+                  minlength="8"
+                >
+                <i id="toggle-password" class="fas fa-eye"></i>
+              </div>
               <small>Password minimal 8 karakter</small>
             </div>
             
             <div class="form-group">
               <label for="confirmPassword" class="form-label">Konfirmasi Password</label>
-              <input 
-                type="password" 
-                id="confirmPassword" 
-                name="confirmPassword" 
-                class="form-input" 
-                required
-                placeholder="Konfirmasi password Anda"
-                minlength="8"
-              >
+              <div class="password-container">
+                <input 
+                  type="password" 
+                  id="confirmPassword" 
+                  name="confirmPassword" 
+                  class="form-input" 
+                  required
+                  placeholder="Konfirmasi password Anda"
+                  minlength="8"
+                >
+                <i id="toggle-confirm-password" class="fas fa-eye"></i>
+              </div>
             </div>
             
             <button type="submit" class="btn btn-block">
@@ -90,7 +96,7 @@ class RegisterPage {
       console.error('Register form not found in DOM');
       return;
     }
-    
+
     registerForm.addEventListener('submit', async (event) => {
       event.preventDefault();
       
@@ -100,6 +106,28 @@ class RegisterPage {
       const confirmPassword = document.getElementById('confirmPassword').value;
       
       await this._presenter.register(name, email, password, confirmPassword);
+    });
+
+    const togglePassword = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('password');
+    
+    togglePassword.addEventListener('click', () => {
+      const type = passwordInput.type === 'password' ? 'text' : 'password';
+      passwordInput.type = type;
+      
+      togglePassword.classList.toggle('fa-eye');
+      togglePassword.classList.toggle('fa-eye-slash');
+    });
+
+    const toggleConfirmPassword = document.getElementById('toggle-confirm-password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    
+    toggleConfirmPassword.addEventListener('click', () => {
+      const type = confirmPasswordInput.type === 'password' ? 'text' : 'password';
+      confirmPasswordInput.type = type;
+      
+      toggleConfirmPassword.classList.toggle('fa-eye');
+      toggleConfirmPassword.classList.toggle('fa-eye-slash');
     });
   }
 
